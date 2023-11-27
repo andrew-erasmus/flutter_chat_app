@@ -12,15 +12,32 @@ class LoginPage extends StatelessWidget {
         primarySwatch: Colors.deepOrange,
       ),
       home: Scaffold(
-        appBar: AppBar(),
-        drawer: Drawer(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print("Button clicked");
-          },
-        ),
-        body: Text("Let's sign you in!"),
-      ),
+          appBar: AppBar(),
+          drawer: Drawer(),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              print("Button clicked");
+            },
+          ),
+          body: const Column(
+            children: [
+              Text(
+                "Let's sign you in!",
+                style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5),
+              ),
+              Text(
+                "Welcome back! \n You've been missed!",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Colors.blueGrey),
+              ),
+            ],
+          )),
     );
   }
 }
