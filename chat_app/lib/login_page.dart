@@ -11,17 +11,13 @@ class LoginPage extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: Scaffold(
-          appBar: AppBar(),
-          drawer: Drawer(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              print("Button clicked");
-            },
-          ),
-          body: Column(
+      home: const Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 "Let's sign you in!",
                 style: TextStyle(
                     fontSize: 30,
@@ -29,28 +25,19 @@ class LoginPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     letterSpacing: 0.5),
               ),
-              const Text(
+              Text(
                 "Welcome back! \n You've been missed!",
+                textAlign: TextAlign.center,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     color: Colors.blueGrey),
               ),
               // Image.network(""),
-              Container(
-                height: 150,
-                width: 150,
-                child: FlutterLogo(),
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(50),
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage("")),
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-              )
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

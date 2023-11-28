@@ -20,80 +20,95 @@ class ChatPage extends StatelessWidget {
           )
         ],
       ),
-      body: ListView(
+      body: Column(
         children: [
-          Container(
-            padding: EdgeInsets.all(24),
-            margin: const EdgeInsets.all(50),
-            decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-              ),
-            ),
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
+          Expanded(
+            child: ListView(
               children: [
-                const Text(
-                  "Hi! This is your message.",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: EdgeInsets.all(24),
+                    margin: const EdgeInsets.all(50),
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
+                    ),
+                    child: const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Hi! This is your message.",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        // Image.network(
+                        //   "",
+                        //   height: 200,
+                        // ),
+                      ],
+                    ),
+                  ),
                 ),
-                // Image.network(
-                //   "",
-                //   height: 200,
-                // ),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(24),
-            margin: const EdgeInsets.all(50),
-            decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-              ),
-            ),
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  "Hi! This is your message.",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    padding: EdgeInsets.all(24),
+                    margin: const EdgeInsets.all(50),
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
+                    ),
+                    child: const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Hi! This is your message.",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        // Image.network(
+                        //   "",
+                        //   height: 200,
+                        // ),
+                      ],
+                    ),
+                  ),
                 ),
-                // Image.network(
-                //   "",
-                //   height: 200,
-                // ),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(24),
-            margin: const EdgeInsets.all(50),
-            decoration: const BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12),
-                topRight: Radius.circular(12),
-                bottomLeft: Radius.circular(12),
-              ),
-            ),
-            child: const Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  "Hi! This is your message.",
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    padding: EdgeInsets.all(24),
+                    margin: const EdgeInsets.all(50),
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(12),
+                        topRight: Radius.circular(12),
+                        bottomLeft: Radius.circular(12),
+                      ),
+                    ),
+                    child: const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "Hi! This is your message.",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        // Image.network(
+                        //   "",
+                        //   height: 200,
+                        // ),
+                      ],
+                    ),
+                  ),
                 ),
-                // Image.network(
-                //   "",
-                //   height: 200,
-                // ),
               ],
             ),
           ),
@@ -104,6 +119,7 @@ class ChatPage extends StatelessWidget {
               borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                   onPressed: () {},
