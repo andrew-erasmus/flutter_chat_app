@@ -1,4 +1,4 @@
-import 'package:chat_app/chat_page.dart';
+// import 'package:chat_app/chat_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -11,7 +11,7 @@ class LoginPage extends StatelessWidget {
       print(passwordController.text);
       print('login successful!');
 
-      Navigator.pushNamed(context, '/chat',
+      Navigator.pushReplacementNamed(context, '/chat',
           arguments: '${userNameController.text}');
     } else {
       print('login not successful!');
