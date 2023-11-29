@@ -9,13 +9,13 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text("Hi Andrew!"),
         actions: [
           IconButton(
             onPressed: () {
+              Navigator.pop(context);
               print("Icon pressed");
             },
             icon: Icon(Icons.logout),

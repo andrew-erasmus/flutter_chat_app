@@ -35,10 +35,10 @@ class ChatInput extends StatelessWidget {
               minLines: 1,
               textCapitalization: TextCapitalization.sentences,
               controller: chatMessageController,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Type your message',
                 hintStyle: TextStyle(color: Colors.grey),
                 border: InputBorder.none,
