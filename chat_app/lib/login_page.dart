@@ -57,8 +57,10 @@ class LoginPage extends StatelessWidget {
                       fontSize: 20,
                       color: Colors.blueGrey),
                 ),
-                // Image.network(""),
-
+                Image.asset(
+                  "assets/banner_image.png",
+                  height: 200,
+                ),
                 Form(
                   key: _formkey,
                   child: Column(
@@ -96,7 +98,6 @@ class LoginPage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     )),
-
                 InkWell(
                   splashColor: Colors.purple,
                   onTap: () {
