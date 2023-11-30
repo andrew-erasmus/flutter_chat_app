@@ -3,6 +3,8 @@ import 'package:chat_app/utils/spaces.dart';
 import 'package:chat_app/utils/textfield_styles.dart';
 import 'package:chat_app/widgets/login_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:social_media_buttons/social_media_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -23,6 +25,7 @@ class LoginPage extends StatelessWidget {
 
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
+  final String _url = 'https://isabellaerasmus.co.za';
 
   @override
   Widget build(BuildContext context) {
@@ -98,18 +101,35 @@ class LoginPage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     )),
-                InkWell(
-                  splashColor: Colors.purple,
-                  onTap: () {
-                    //TODO: Navigate to browser
-                    print('link clicked');
+                GestureDetector(
+                  onTap: () async {
+                    if (!await launch(_url)) {
+                      throw Exception('Could not launch URL');
+                    }
                   },
-                  child: const Column(
+                  child: Column(
                     children: [
                       Text('Find us on'),
-                      Text('https://isabellaerasmus.co.za'),
+                      Text(_url),
                     ],
                   ),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SocialMediaButton.twitter(
+                      url: 'https://twitter.com',
+                      color: Colors.blue,
+                    ),
+                    SocialMediaButton.linkedin(
+                      url: 'https://linkedin.com',
+                      color: Colors.deepPurple,
+                    ),
+                    SocialMediaButton.instagram(
+                      url: 'https://instagram.com',
+                      color: Colors.pink,
+                    ),
+                  ],
                 ),
               ],
             ),
