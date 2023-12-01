@@ -55,6 +55,7 @@ class _ChatPageState extends State<ChatPage> {
         actions: [
           IconButton(
             onPressed: () {
+              context.read<AuthService>().logoutUser();
               Navigator.pushReplacementNamed(
                   context, '/'); //Always the home page that created in main
               print("Icon pressed");
