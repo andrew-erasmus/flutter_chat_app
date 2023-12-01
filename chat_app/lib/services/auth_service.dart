@@ -7,5 +7,3 @@ class AuthService {
     return 'poojab26';
   }
 }
-
-// LOOK AT STATE MANAGEMENT SOLUTIONS ON FLUTTER DEV
