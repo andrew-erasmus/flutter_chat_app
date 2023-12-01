@@ -2,9 +2,16 @@ import "package:chat_app/models/chat_message_entity.dart";
 import "package:chat_app/widgets/picker_body.dart";
 import "package:flutter/material.dart";
 
-class ChatInput extends StatelessWidget {
+class ChatInput extends StatefulWidget {
   final Function(ChatMessageEntity) onSubmit;
   ChatInput({super.key, required this.onSubmit});
+
+  @override
+  State<ChatInput> createState() => _ChatInputState();
+}
+
+class _ChatInputState extends State<ChatInput> {
+  String _selectedImageUrl = "";
 
   final chatMessageController = TextEditingController();
 
@@ -18,13 +25,26 @@ class ChatInput extends StatelessWidget {
       author: Author(userName: 'poojab26'),
     );
 
-    onSubmit(newChatMessage);
+    if (_selectedImageUrl.isNotEmpty) {
+      newChatMessage.imageUrl = _selectedImageUrl;
+    }
+    widget.onSubmit(newChatMessage);
+    chatMessageController.clear();
+    _selectedImageUrl = '';
+    setState(() {});
+  }
+
+  void onImagePicked(String newImageUrl) {
+    setState(() {
+      _selectedImageUrl = newImageUrl;
+    });
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      // height: 100,
       decoration: const BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -37,13 +57,8 @@ class ChatInput extends StatelessWidget {
               showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
-                    return const Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(40.0),
-                        child: Text("Images API no longer exists"),
-                      ),
-                    );
-                    //NetworkPickerImageBody();
+                    return NetworkImagePickerBody(
+                        onImageSelected: onImagePicked);
                   });
             },
             icon: const Icon(
@@ -53,20 +68,27 @@ class ChatInput extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: TextField(
-              keyboardType: TextInputType.multiline,
-              maxLines: 5,
-              minLines: 1,
-              textCapitalization: TextCapitalization.sentences,
-              controller: chatMessageController,
-              style: const TextStyle(
-                color: Colors.white,
-              ),
-              decoration: const InputDecoration(
-                hintText: 'Type your message',
-                hintStyle: TextStyle(color: Colors.grey),
-                border: InputBorder.none,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 5,
+                  minLines: 1,
+                  textCapitalization: TextCapitalization.sentences,
+                  controller: chatMessageController,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  decoration: const InputDecoration(
+                    hintText: 'Type your message',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: InputBorder.none,
+                  ),
+                ),
+                if (_selectedImageUrl.isNotEmpty)
+                  Image.network(_selectedImageUrl, height: 50)
+              ],
             ),
           ),
           IconButton(

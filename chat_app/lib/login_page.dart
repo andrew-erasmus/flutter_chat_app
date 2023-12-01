@@ -77,7 +77,7 @@ class LoginPage extends StatelessWidget {
                               value.length < 5) {
                             return 'Your username should be more than 5 characters';
                           } else if (value != null && value.isEmpty) {
-                            return "Please type your username";
+                            return "Please type your password";
                           }
                           return null;
                         },
