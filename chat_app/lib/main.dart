@@ -1,7 +1,6 @@
 import 'package:chat_app/chat_page.dart';
 import 'package:chat_app/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:json_serializable/json_serializable.dart';
 
 void main() {
   runApp(ChatApp());

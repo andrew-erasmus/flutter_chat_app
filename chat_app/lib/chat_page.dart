@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:chat_app/models/image_model.dart';
+import 'package:chat_app/repo/image_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:chat_app/models/chat_message_entity.dart';
 import 'package:chat_app/widgets/chat_bubble.dart';
@@ -17,6 +18,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   List<ChatMessageEntity> _messages = [];
+  final ImageRepository _imageRepo = ImageRepository();
 
   _loadInitialMessages() async {
     rootBundle.loadString('assets/mock_messages.json').then((response) {
@@ -31,21 +33,6 @@ class _ChatPageState extends State<ChatPage> {
     }).then((_) => print('Done!'));
   }
 
-  _getNetworkImages() async {
-    var endpointUrl = Uri.parse('https://pixelford.com/api2/images');
-
-    final response = await http.get(endpointUrl);
-
-    if (response.statusCode == 200) {
-      final List<dynamic> decodedList =
-          jsonDecode(response.body) as List; //body gives the actual JSON
-      final List<PixelfordImage> _imageList = decodedList.map((listItem) {
-        return PixelfordImage.fromJson(listItem);
-      }).toList();
-      print(_imageList[0].urlFullSize);
-    }
-  }
-
   onMessageSent(ChatMessageEntity entity) {
     _messages.add(entity);
     setState(() {});
@@ -54,7 +41,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void initState() {
     _loadInitialMessages();
-    _getNetworkImages();
     super.initState();
   }
 
@@ -79,6 +65,17 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Column(
         children: [
+          //! Cannot be used since API not available
+          // FutureBuilder<List<PixelfordImage>>(
+          //   future: _imageRepo.getNetworkImages(),
+          //   builder: (BuildContext context,
+          //       AsyncSnapshot<List<PixelfordImage>> snapshot) {
+          //     if (snapshot.hasData)
+          //       return Image.network(snapshot.data![0].urlSmallSize);
+
+          //     return CircularProgressIndicator();
+          //   },
+          // ),
           Expanded(
               child: ListView.builder(
                   itemCount: _messages.length,

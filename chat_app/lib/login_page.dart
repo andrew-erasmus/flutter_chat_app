@@ -36,6 +36,7 @@ class LoginPage extends StatelessWidget {
         primarySwatch: Colors.purple,
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
