@@ -36,6 +36,7 @@ class LoginPage extends StatelessWidget {
         primarySwatch: Colors.purple,
       ),
       home: Scaffold(
+        backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Padding(
@@ -61,10 +62,16 @@ class LoginPage extends StatelessWidget {
                       fontSize: 20,
                       color: Colors.blueGrey),
                 ),
-                Image.asset(
-                  "assets/banner_image.png",
+                Container(
                   height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/banner_image.png'),
+                      ),
+                      borderRadius: BorderRadius.circular(12)),
                 ),
+                verticleSpacing(24),
                 Form(
                   key: _formkey,
                   child: Column(
@@ -94,14 +101,15 @@ class LoginPage extends StatelessWidget {
                 ),
                 verticleSpacing(24),
                 ElevatedButton(
-                    onPressed: () {
-                      loginUser(context);
-                    },
-                    child: const Text(
-                      'Login',
-                      style:
-                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    )),
+                  onPressed: () {
+                    loginUser(context);
+                  },
+                  child: const Text(
+                    'Login',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                verticleSpacing(24),
                 GestureDetector(
                   onTap: () async {
                     if (!await launch(_url)) {
@@ -115,6 +123,7 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
+                verticleSpacing(24),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
