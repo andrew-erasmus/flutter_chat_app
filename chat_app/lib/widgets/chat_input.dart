@@ -37,7 +37,13 @@ class ChatInput extends StatelessWidget {
               showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
-                    return NetworkPickerImageBody();
+                    return const Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(40.0),
+                        child: Text("Images API no longer exists"),
+                      ),
+                    );
+                    //NetworkPickerImageBody();
                   });
             },
             icon: const Icon(

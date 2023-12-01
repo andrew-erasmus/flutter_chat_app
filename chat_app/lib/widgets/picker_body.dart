@@ -26,8 +26,8 @@ class NetworkPickerImageBody extends StatelessWidget {
             ),
           );
         }
-        return Padding(
-          padding: const EdgeInsets.all(12.0),
+        return const Padding(
+          padding: EdgeInsets.all(12.0),
           child: Center(child: CircularProgressIndicator()),
         );
       },
