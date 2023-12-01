@@ -31,6 +31,121 @@ class LoginPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final String _url = 'https://isabellaerasmus.co.za';
 
+  Widget _buildHeader(context) {
+    return Column(
+      children: [
+        const Text(
+          "Let's sign you in!",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 30,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.5),
+        ),
+        const Text(
+          "Welcome back! \n You've been missed!",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20,
+              color: Colors.blueGrey),
+        ),
+        Container(
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/banner_image.png'),
+              ),
+              borderRadius: BorderRadius.circular(12)),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildForm(context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              LoginTextField(
+                hintText: 'Enter your username',
+                validator: (value) {
+                  if (value != null && value.isNotEmpty && value.length < 5) {
+                    return 'Your username should be more than 5 characters';
+                  } else if (value != null && value.isEmpty) {
+                    return "Please type your password";
+                  }
+                  return null;
+                },
+                controller: userNameController,
+              ),
+              verticleSpacing(24),
+              LoginTextField(
+                hasAsterisks: true,
+                hintText: 'Enter your password',
+                controller: passwordController,
+              ),
+            ],
+          ),
+        ),
+        verticleSpacing(24),
+        ElevatedButton(
+          onPressed: () async {
+            await loginUser(context);
+          },
+          child: const Text(
+            'Login',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFooter() {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () async {
+            if (!await launch(_url)) {
+              throw Exception('Could not launch URL');
+            }
+          },
+          child: Column(
+            children: [
+              Text('Find us on'),
+              Text(_url),
+            ],
+          ),
+        ),
+        verticleSpacing(24),
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SocialMediaButton.twitter(
+              url: 'https://twitter.com',
+              color: Colors.blue,
+            ),
+            SocialMediaButton.linkedin(
+              url: 'https://linkedin.com',
+              color: Colors.deepPurple,
+            ),
+            SocialMediaButton.instagram(
+              url: 'https://instagram.com',
+              color: Colors.pink,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,108 +160,47 @@ class LoginPage extends StatelessWidget {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  "Let's sign you in!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5),
-                ),
-                const Text(
-                  "Welcome back! \n You've been missed!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 20,
-                      color: Colors.blueGrey),
-                ),
-                Container(
-                  height: 200,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/banner_image.png'),
-                      ),
-                      borderRadius: BorderRadius.circular(12)),
-                ),
-                verticleSpacing(24),
-                Form(
-                  key: _formkey,
-                  child: Column(
-                    children: [
-                      LoginTextField(
-                        hintText: 'Enter your username',
-                        validator: (value) {
-                          if (value != null &&
-                              value.isNotEmpty &&
-                              value.length < 5) {
-                            return 'Your username should be more than 5 characters';
-                          } else if (value != null && value.isEmpty) {
-                            return "Please type your password";
-                          }
-                          return null;
-                        },
-                        controller: userNameController,
-                      ),
-                      verticleSpacing(24),
-                      LoginTextField(
-                        hasAsterisks: true,
-                        hintText: 'Enter your password',
-                        controller: passwordController,
-                      ),
-                    ],
-                  ),
-                ),
-                verticleSpacing(24),
-                ElevatedButton(
-                  onPressed: () async {
-                    await loginUser(context);
-                  },
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                verticleSpacing(24),
-                GestureDetector(
-                  onTap: () async {
-                    if (!await launch(_url)) {
-                      throw Exception('Could not launch URL');
-                    }
-                  },
-                  child: Column(
-                    children: [
-                      Text('Find us on'),
-                      Text(_url),
-                    ],
-                  ),
-                ),
-                verticleSpacing(24),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+            child:
+                LayoutBuilder(builder: (context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 1000) {
+                //web layout
+                return Row(
                   children: [
-                    SocialMediaButton.twitter(
-                      url: 'https://twitter.com',
-                      color: Colors.blue,
+                    Spacer(
+                      flex: 1,
                     ),
-                    SocialMediaButton.linkedin(
-                      url: 'https://linkedin.com',
-                      color: Colors.deepPurple,
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildHeader(context),
+                          _buildFooter(),
+                        ],
+                      ),
                     ),
-                    SocialMediaButton.instagram(
-                      url: 'https://instagram.com',
-                      color: Colors.pink,
+                    Spacer(
+                      flex: 1,
+                    ),
+                    Expanded(child: _buildForm(context)),
+                    Spacer(
+                      flex: 1,
                     ),
                   ],
-                ),
-              ],
-            ),
+                );
+              }
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _buildHeader(context),
+                  verticleSpacing(24),
+                  _buildForm(context),
+                  verticleSpacing(24),
+                  _buildFooter(),
+                  verticleSpacing(24),
+                ],
+              );
+            }),
           ),
         ),
       ),
